@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <title>Liste Courses</title>
+
+</head>
+
+<body>
+
+<h1>Liste des courses</h1>
+
+<div id="list-div">
+</div>
+
+<div align="center">
+<button id="export-button" onclick="exportList()">Export</button>
+</div>
+
+</body>
+
+    <script>
+
+    document.body.onload = populateList;
+
+    // {idHome: 0, idShop: 1, name: "infusion (david)"},
+    // {idHome: 0, idShop: 1, name: "infusion (nadia)"},
+
+    var itemList = [
+    {idHome: 0, idShop: 1, name: "déo (david)"},
+    {idHome: 0, idShop: 1, name: "déo (nadia)"},
+    {idHome: 0, idShop: 1, name: "dentifrice (david)"},
+    {idHome: 0, idShop: 1, name: "dentifrice (nadia)"},
+    {idHome: 0, idShop: 1, name: "brosse à dent (david)"},
+    {idHome: 0, idShop: 1, name: "brosse à dent (nadia)"},
+    {idHome: 0, idShop: 1, name: "gel douche"},
+    {idHome: 0, idShop: 3, name: "PQ"},
+    //
+    {idHome: 0, idShop: 3, name: "lessive"},
+    {idHome: 0, idShop: 3, name: "tablettes lave vaisselle"},
+    {idHome: 0, idShop: 3, name: "mouchoirs"},
+    {idHome: 0, idShop: 3, name: "sac poubelle"},
+    {idHome: 0, idShop: 6.2, name: "vinaigre blanc"},
+    //
+    {idHome: 0, idShop: 1, name: "savon mains"},
+    {idHome: 0, idShop: 3, name: "éponge"},
+    {idHome: 0, idShop: 3, name: "liquide vaisselle"},
+    //
+    {idHome: 0, idShop: 13, name: "gateaux (david)"},
+    {idHome: 0, idShop: 13, name: "infusion (david)"},
+    {idHome: 0, idShop: 7, name: "oeufs"},
+    // {idHome: 0, idShop: 0, name: "pain pannini"},
+    {idHome: 0, idShop: 11, name: "pain hamburger"},
+    {idHome: 0, idShop: 11, name: "pain de mie"},
+    {idHome: 0, idShop: 7, name: "lait"},
+    {idHome: 0, idShop: 6.2, name: "gateaux (nadia)"},
+    {idHome: 0, idShop: 9, name: "pâte pizza"},
+    {idHome: 0, idShop: 6.3, name: "café grains"},
+    {idHome: 0, idShop: 12, name: "amandes, etc."},
+    {idHome: 0, idShop: 6.2, name: "farine"},
+    {idHome: 0, idShop: 4, name: "jus d'orange"},
+    {idHome: 0, idShop: 5, name: "confiture"},
+    {idHome: 0, idShop: 6.2, name: "huile d'olive"},
+    {idHome: 0, idShop: 6.2, name: "vinaigre balsamique"},
+    {idHome: 0, idShop: 6.2, name: "coulis de tomate"},
+    {idHome: 0, idShop: 6.2, name: "gros sel"},
+    {idHome: 0, idShop: 6.2, name: "sel"},
+    {idHome: 0, idShop: 6.2, name: "poivre"},
+    {idHome: 0, idShop: 11, name: "pain"},
+    //
+    {idHome: 0, idShop: 6.1, name: "riz"},
+    {idHome: 0, idShop: 6.1, name: "spaghetti"},
+    {idHome: 0, idShop: 6.1, name: "tortilla"},
+    {idHome: 0, idShop: 6.1, name: "fusilli"},
+    {idHome: 0, idShop: 6.1, name: "semoule"},
+    //
+    {idHome: 0, idShop: 2, name: "pots (thomas)"},
+    {idHome: 0, idShop: 2, name: "lait (thomas)"},
+    {idHome: 0, idShop: 5, name: "eau (thomas)"},
+    {idHome: 0, idShop: 5, name: "eau (nadia)"},
+    //
+    {idHome: 0, idShop: 12, name: "tomates"},
+    {idHome: 0, idShop: 12, name: "ail"},
+    {idHome: 0, idShop: 12, name: "oignons"},
+    {idHome: 0, idShop: 12, name: "échalottes"},
+    {idHome: 0, idShop: 12, name: "fruits/légumes"},
+    {idHome: 0, idShop: 12, name: "pommes de terre"},
+    //
+    {idHome: 0, idShop: 9, name: "jambon blanc"},
+    {idHome: 0, idShop: 9, name: "grison"},
+    {idHome: 0, idShop: 9, name: "lardons/alumettes"},
+    {idHome: 0, idShop: 9, name: "ravioles"},
+    {idHome: 0, idShop: 9, name: "pate à tarte"},
+    {idHome: 0, idShop: 8.2, name: "beurre (tartines)"},
+    {idHome: 0, idShop: 8.2, name: "beurre (cuisson)"},
+    {idHome: 0, idShop: 8.2, name: "crème fraîche"},
+    {idHome: 0, idShop: 8.3, name: "comté"},
+    {idHome: 0, idShop: 8.3, name: "mozza"},
+    {idHome: 0, idShop: 6, name: "compotes (david)"},
+    {idHome: 0, idShop: 6, name: "compotes (nadia)"},
+    {idHome: 0, idShop: 8.2, name: "yogourt (thomas)"},
+    {idHome: 0, idShop: 8.2, name: "yogourt (david)"},
+    {idHome: 0, idShop: 8.2, name: "yogourt (nadia)"},
+    {idHome: 0, idShop: 6, name: "moutarde"},
+    {idHome: 0, idShop: 12, name: "champignons"},
+    {idHome: 0, idShop: 12, name: "salade"},
+    {idHome: 0, idShop: 10, name: "viande"},
+    {idHome: 0, idShop: 10, name: "viande hachée"},
+    {idHome: 0, idShop: 10, name: "blanc de poulet"},
+    {idHome: 0, idShop: 10, name: "nuggets"},
+    //
+    {idHome: 0, idShop: 13, name: "surgelés nuggets"},
+    {idHome: 0, idShop: 13, name: "surgelés poisson pané"},
+    {idHome: 0, idShop: 13, name: "surgelés steack haché"},
+    ]
+
+    // create list based on home ordering
+    function populateList(){
+
+        // sort based on home id
+        // itemList.sort(function(a,b) { return a.idHome - b.idHome;});
+
+        // add element to dom
+        itemList.forEach( (item, id)=>{
+            addElement(itemList[id].name);
+            // addElement(itemList[id].name + ' (home: ' + itemList[id].idHome + ', shop: ' + itemList[id].idShop + ')');
+        });
+    }
+
+    // add element as html line with toggle for selection
+    function addElement (elmtName) {
+
+      // create a new div element
+      var el = document.createElement("div");
+      var domString = '<div> <label><input type="checkbox">   ' + elmtName + '  </label></div>';
+      el.innerHTML = domString;
+
+      // add to doc
+      document.getElementById("list-div").appendChild(el.firstChild);
+    }
+
+    // export list based on shop ordering
+    function exportList(){
+
+        // get list of checked element names
+        var lines = document.body.getElementsByTagName("label");
+        list = [];
+        for( let line of lines){
+            if( !line.childNodes[0].checked ){ continue; }
+
+            // find reference of line text in itemList names
+            var item = itemList.filter(obj => {
+                return obj.name == line.innerText.trim();
+            });
+
+            // save to local
+            list.push(item[0]);
+        }
+
+        // sort based on shop id
+        list.sort(function(a,b) { return a.idShop - b.idShop;});
+
+        // convert list of items to list of labels
+        labelList = []
+        list.forEach( (item, id) => {
+            v =  item.name;
+            // v =  item.name + ' (home: ' + item.idHome + ', shop: ' + item.idShop + ')';
+            labelList.push('<p style="font-size:22px;"> ' + v + '</p>');
+        });
+
+        // open new page
+        // var w = window.open("", "_self"); // open in same page
+        var w = window.open(""); // open in new page
+
+        // populate
+        w.document.writeln('<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="styles.css"><title>Liste Courses</title></head><body><div>' + labelList.join("") + '</div></body></html>');
+        w.document.close();
+        // document.body.innerHTML=labelList.join("");
+    }
+
+    </script>
+
+</html>
