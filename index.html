@@ -179,7 +179,7 @@
         var lines = document.body.getElementsByTagName("label");
         list = [];
         for( let line of lines){
-            // if( !line.childNodes[0].checked ){ continue; }
+            if( !line.childNodes[0].checked ){ continue; }
 
             // find reference of line text in itemList names
             var item = itemList.filter(obj => {
