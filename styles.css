@@ -1,19 +1,25 @@
-h1{
+h1 {
   text-align: center;
 }
 
-div{
+#list-div {
+/*  padding: 15px;*/
+  margin: auto;
+  width: 90%;
+}
+
+div {
   padding: 15px;
 }
 
-p{
+p {
   padding: 1px;
   margin-top: 0px;
   margin-bottom: 0px;
   font-size: 18px;
 }
 
-label{
+label {
   font-size: 22px;
   font-weight: 250;
 }
@@ -22,16 +28,21 @@ input[type=checkbox] {
     transform: scale(1.5);
 }
 
-body{
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+body {
+/*  font-family: -apple-system, BlinkMacSystemFont, sans-serif;*/
+  font-family: 'Roboto', sans-serif;
+/*  background-color: blue;*/
 }
 
-button{
-  -moz-appearance: none;
+button {
+/*  -moz-appearance: none;*/
   font-size: 22px;
   width: 100%;
   background-color: transparent;
   border-radius: 10px;
   border-width: 2px;
+  border-color: black;
   padding: 10px;
+  margin: 10px;
+/*  color: red;*/
 }
