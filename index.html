@@ -11,14 +11,12 @@
 
 <body>
 
-<!-- <h1>Courses</h1> -->
-
-<div id="list-div">
+<div id="list-div" class="column">
 </div>
 
-<div align="center">
-    <!-- <br> -->
-<button id="export-button" onclick="exportList()">EXPORT</button>
+<div class="column">
+<br>
+<button class="press-button" onclick="exportList()">EXPORT</button>
 </div>
 
 </body>
@@ -72,19 +70,25 @@
     {idHome: 0, idShop: 6.7, name: "farine blé"},
     {idHome: 0, idShop: 6.7, name: "farine sarrasin"},
     {idHome: 0, idShop: 4, name: "jus d'orange"},
+    {idHome: 0, idShop: 4, name: "briquettes jus"},
     // {idHome: 0, idShop: 7, name: "lait (T)"},
     // {idHome: 0, idShop: 2, name: "lait (L)"},
     {idHome: 0, idShop: 6.2, name: "coulis de tomate"},
+    {idHome: 0, idShop: 6.2, name: "thon"},
+    {idHome: 0, idShop: 6.2, name: "petits pois carotte"},
     {idHome: 0, idShop: 6.2, name: "sauce pâtes"},
     {idHome: 0, idShop: 6.2, name: "soupe"},
     {idHome: 0, idShop: 6.2, name: "gros sel"},
+    {idHome: 0, idShop: 7, name: "sucre"},
     {idHome: 0, idShop: 6.2, name: "poivre"},
     {idHome: 0, idShop: 6.3, name: "café"},
+    {idHome: 0, idShop: 6.3, name: "senseo"},
     // {idHome: 0, idShop: 13, name: "gateaux (D)"},
     {idHome: 0, idShop: 6.5, name: "gouters (TL)"},
     {idHome: 0, idShop: 11, name: "brioche"},
     // {idHome: 0, idShop: 13, name: "choco crunchy"},
     {idHome: 0, idShop: 6.4, name: "verveine"},
+    {idHome: 0, idShop: 12.6, name: "nutella"},
     // {idHome: 0, idShop: 12, name: "amandes"},
     // {idHome: 0, idShop: 5, name: "volvic"},
     // {idHome: 0, idShop: 5, name: "eau (L)"},
@@ -103,6 +107,7 @@
     {idHome: 0, idShop: 6.1, name: "spaghetti"},
     {idHome: 0, idShop: 6.1, name: "papillotes"},
     {idHome: 0, idShop: 6.1, name: "fusilli"},
+    {idHome: 0, idShop: 6.1, name: "coquillettes"},
     {idHome: 0, idShop: 6.1, name: "semoule"},
     //
     // cuisine: placard droite évier bas
@@ -163,6 +168,7 @@
         item.name = item.name.charAt(0).toUpperCase() + item.name.slice(1);
     });
 
+
     // create list based on home ordering
     function populateList(){
 
@@ -170,38 +176,40 @@
         // itemList.sort(function(a,b) { return a.idHome - b.idHome;});
 
         // add element to dom
-        itemList.forEach( (item, id)=>{
-            addElement(itemList[id].name);
-            // addElement(itemList[id].name + ' (home: ' + itemList[id].idHome + ', shop: ' + itemList[id].idShop + ')');
+        itemList.forEach( (item, id) => {
+
+            // addElement(itemList[id].name);
+
+            var btn = document.createElement("button");
+            btn.className = "toggle-button"
+            btn.innerHTML = itemList[id].name
+            document.getElementById("list-div").appendChild(btn);
+
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("active");
+                // Optional: use a custom data attribute to represent the state
+                btn.dataset.checked = btn.classList.contains("active");
+                console.log("Checked:", btn.dataset.checked);
+            });
         });
     }
 
-    // add element as html line with toggle for selection
-    function addElement (elmtName) {
-
-      // create a new div element
-      var el = document.createElement("div");
-      var domString = '<div> <label><input type="checkbox">   ' + elmtName + '  </label></div>';
-      el.innerHTML = domString;
-
-      // add to doc
-      document.getElementById("list-div").appendChild(el.firstChild);
-    }
 
     // export list based on shop ordering
     function exportList(){
 
         // get list of checked element names
-        var lines = document.body.getElementsByTagName("label");
+        var objects = document.body.getElementsByClassName("toggle-button");
+
         list = [];
-        for( let line of lines){
+        for( let obj of objects){
 
             // discard if not ticked
-            if( !line.childNodes[0].checked ){ continue; }
+            if( !obj.classList.contains("active") ){ continue; }
 
             // find reference of line text in itemList names
-            var item = itemList.filter(obj => {
-                return obj.name == line.innerText.trim();
+            var item = itemList.filter(elmt => {
+                return elmt.name == obj.innerText.trim();
             });
 
             // save to local
