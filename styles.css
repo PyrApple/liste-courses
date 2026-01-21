@@ -1,5 +1,5 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Georgia', serif;
 }
 
 p {
@@ -15,6 +15,7 @@ p {
 }
 
 button {
+  font-family: 'courier', sans-serif;
   border: 1px solid;
   border-radius: 15px;
   width: 96%;
